@@ -1,3 +1,6 @@
+import java.lang.Math;
+import java.util.*;
+
 public class BST { 
   
   private class Node { 
@@ -68,7 +71,22 @@ public class BST {
     this.counter = 0;
   } //BST()
   
+  /*
+  * checks to see if the left and right children are null
+  * increments the size if the children are not null
+  * @return size
+  */
   public int size() { 
+    int size = 1;
+    
+    if (leftChild != null) { 
+      size +=leftChild.size();      
+    } // if 
+    
+    if (rightChild != null) { 
+      size += rightChild.size()
+    } // if 
+    return size;
   } //size 
   
   public void insert(int element) { 
