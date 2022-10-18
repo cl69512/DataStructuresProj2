@@ -66,8 +66,8 @@ I should be able to call one of the above public methods without supplying any
 parameter and it should print the appropriate order of elements because it called
 its corresponding helper method.
 Submission Instructions:
-- Create a README t ext file t hat contains your name and any s pecific compilation
-instructions you may have f or your program.
+- Create a README text file that contains your name and any specific compilation
+instructions you may have for your program.
 - Submit BST.java.
 - Make sure you receive the submission email.
 Late Project Submission: Except in the cases of serious illness or emergencies, projects
