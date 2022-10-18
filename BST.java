@@ -76,6 +76,8 @@ public class BST {
   * increments the size if the children are not null
   * @return size
   */
+
+  
   public int size() {
     if (leftChild != null && rightChild != null) {
       return leftChild.size() + 1 + rightChild.size();
@@ -194,11 +196,12 @@ public class BST {
     preorderHelper(root);
   } // preorder
 
-  /* 
+  
   public void postorder() {
+    postorderHelper(root);
   } //postorder
 
-    */
+  
 
     /**
      * Prints the elements of the tree inorder, meaning checking
@@ -206,7 +209,8 @@ public class BST {
      */
   public void inorder() {
       if (this.root == null) {
-          return;
+        System.out.println("Tree is empty. NOting to traverse.");
+        return;
       } // if
       inorderHelper(root);
   } //inorder
@@ -222,11 +226,20 @@ public class BST {
     preorderHelper(current.rightChild);
   } //preorderHelper
 
-  /* 
+  
   private void postorderHelper(Node current) {
+
+    if (current == null) {
+      System.out.println("Tree is empty. Nothing to traverse");
+      return;
+    }
+
+    postorderHelper(current.leftChild);
+    postorderHelper(current.rightChild);
+
+    System.out.print(current.key + " ");
   } //postorderHelper
 
-    */
 
     /**
      * Helper method for inorder that recursively checks left
@@ -244,13 +257,13 @@ public class BST {
   } //inorderHelper
 
    public static void main(String[] args) {
-       BST tree = new BST();
-       tree.insert(12);
-       tree.insert(3);
-       tree.insert(13);
-       tree.insert(6);
-       tree.insert(14);
-       tree.preorder();
+      BST tree = new BST();
+      tree.insert(12);
+      tree.insert(3);
+      tree.insert(13);
+      tree.insert(6);
+      tree.insert(14);
+      tree.postorder();
    } // main
 
 } // BST
