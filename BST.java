@@ -130,11 +130,54 @@ public class BST {
 
 
 
-    /*
+    
 
   public void delete(int element) {
+    root = deleteHelper(root, element);
   } // delete
 
+  /*
+   * A recursive function to delete an existing node in BST
+   */
+  Node deleteHelper(Node root, int key) {
+
+    if (root == null) {
+      return root;
+    }
+
+    if (key < root.key) {
+      root.leftChild = deleteHelper(root.leftChild, key);
+    } else if (key > root.key) {
+      root.rightChild = deleteHelper(root.rightChild, key);
+    } else {
+      if (root.leftChild == null) {
+        return root.rightChild;
+      } else if (root.rightChild == null) {
+        return root.leftChild;
+      }
+
+      root.key = minValue(root.rightChild);
+      root.rightChild = deleteHelper(root.rightChild, key);
+    }
+    counter--;
+    return root;
+  }
+
+  /*
+   * Helper method for delete to determine
+   * minimum value
+   */
+  int minValue(Node root) {
+    int minValue = root.key;
+
+    while (root.leftChild != null) {
+      minValue = root.leftChild.key;
+      root = root.leftChild;
+    }
+    return minValue;
+  }
+
+  /*
   public void preorder() {
   } // preorder
 
@@ -186,6 +229,7 @@ public class BST {
        tree.insert(13);
        tree.insert(6);
        tree.insert(14);
+       tree.delete(3);
        tree.inorder();
    } // main
 
