@@ -74,24 +74,12 @@ public class BST {
   /**
   * checks to see if the left and right children are null
   * increments the size if the children are not null
-  * @return size
+  * @return counter
   */
 
   
   public int size() {
-    if (leftChild != null && rightChild != null) {
-      return leftChild.size() + 1 + rightChild.size();
-    } // if 
-    else if (leftChild != null && rightChild == null) { 
-      return leftChild.size() + 1;
-    } // else 
-    else if (leftChild == null && rightChild != null) {
-      return rightChild.size() + 1;
-    } //else 
-    
-    else {
-      return 0;
-    } // else 
+   return this.counter;
   } //size
 
   /**
