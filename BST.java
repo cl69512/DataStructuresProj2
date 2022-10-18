@@ -77,19 +77,7 @@ public class BST {
   * @return size
   */
   public int size() {
-    if (leftChild != null && rightChild != null) {
-      return leftChild.size() + 1 + rightChild.size();
-    } // if 
-    else if (leftChild != null && rightChild == null) { 
-      return leftChild.size() + 1;
-    } // else 
-    else if (leftChild == null && rightChild != null) {
-      return rightChild.size() + 1;
-    } //else 
-    
-    else {
-      return 0;
-    } // else  
+    return counter;
   } //size
 
   /**
@@ -189,10 +177,12 @@ public class BST {
     return minValue;
   }
 
-  /*
+
   public void preorder() {
+    preorderHelper(root);
   } // preorder
 
+  /* 
   public void postorder() {
   } //postorder
 
@@ -209,11 +199,18 @@ public class BST {
       inorderHelper(root);
   } //inorder
 
-    /*
 
   private void preorderHelper(Node current) {
+    if (current == null) {
+      return;
+    }
+    System.out.print(current.key + " ");
+
+    preorderHelper(current.leftChild);
+    preorderHelper(current.rightChild);
   } //preorderHelper
 
+  /* 
   private void postorderHelper(Node current) {
   } //postorderHelper
 
@@ -241,8 +238,7 @@ public class BST {
        tree.insert(13);
        tree.insert(6);
        tree.insert(14);
-       tree.delete(3);
-       tree.inorder();
+       tree.preorder();
    } // main
 
 } // BST
