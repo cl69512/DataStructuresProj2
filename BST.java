@@ -77,7 +77,19 @@ public class BST {
   * @return size
   */
   public int size() {
-    return counter;
+    if (leftChild != null && rightChild != null) {
+      return leftChild.size() + 1 + rightChild.size();
+    } // if 
+    else if (leftChild != null && rightChild == null) { 
+      return leftChild.size() + 1;
+    } // else 
+    else if (leftChild == null && rightChild != null) {
+      return rightChild.size() + 1;
+    } //else 
+    
+    else {
+      return 0;
+    } // else 
   } //size
 
   /**
