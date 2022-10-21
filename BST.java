@@ -153,35 +153,44 @@ public class BST {
     } else if (key > root.key) {
       root.rightChild = deleteHelper(root.rightChild, key);
     } else {
-      if (root.leftChild == null) {
-        return root.rightChild;
-      } else if (root.rightChild == null) {
-        return root.leftChild;
-      }
-
-      root.key = minValue(root.rightChild);
-      root.rightChild = deleteHelper(root.rightChild, key);
-    }
+        if (root.leftChild != null && root.rightChild != null) {
+            Node check = root;
+            Node temp = maxValue(check.leftChild);
+            root.key = temp.key;
+            root.leftChild = deleteHelper(root.leftChild, temp.key);
+        } else if (root.leftChild != null) {
+            return root.leftChild;
+        } else if (root.rightChild != null) {
+            return root.rightChild;
+        } else {
+            root = null;
+        } // if
+    } // if
     return root;
-  }
+  } // deleteHelper
 
     /**
    * Helper method for delete to determine
-   * minimum value
+   * maximum value
    */
-  int minValue(Node root) {
-    int minValue = root.key;
-
-    while (root.leftChild != null) {
-      minValue = root.leftChild.key;
-      root = root.leftChild;
-    }
-    return minValue;
-  }
+  Node maxValue(Node root) {
+      if (root == null) {
+          return null;
+      } else {
+          Node maxKey = root;
+          while (maxKey.rightChild != null) {
+              maxKey = maxKey.rightChild;
+          } // while
+          return maxKey;
+      } // if
+  } // maxValue
 
 
   public void preorder() {
-    preorderHelper(root);
+      if (this.root == null) {
+          System.out.println("Tree is empty. Nothing to traverse.");
+      } // if
+      preorderHelper(root);
   } // preorder
 
 
@@ -248,93 +257,95 @@ public class BST {
 
    public static void main(String[] args) {
       BST tree = new BST();
+
       tree.insert(4);
 
-        tree.insert(5);
+      tree.insert(5);
 
-        tree.insert(2);
+      tree.insert(2);
 
-        tree.insert(9);
+      tree.insert(9);
 
-        tree.insert(6);
+      tree.insert(6);
 
-        tree.insert(11);
+      tree.insert(11);
 
-        tree.insert(10);
+      tree.insert(10);
 
-        tree.insert(8);
+      tree.insert(8);
 
-        tree.insert(1);
+      tree.insert(1);
 
-        tree.insert(14);
+      tree.insert(14);
 
-        System.out.println("Example 1: preorder traversal");
+      System.out.println("Example 1: preorder traversal");
 
-        System.out.println("Expected:\t" + "4 2 1 5 9 6 8 11 10 14");
+      System.out.println("Expected:\t" + "4 2 1 5 9 6 8 11 10 14");
 
-        System.out.print("Your Tree:\t");
+      System.out.print("Your Tree:\t");
 
-        tree.preorder();
+      tree.preorder();
 
-        System.out.println("\nExample 2: postorder traversal");
+      System.out.println("\nExample 2: postorder traversal");
 
-        System.out.println("Expected:\t" + "1 2 8 6 10 14 11 9 5 4");
+      System.out.println("Expected:\t" + "1 2 8 6 10 14 11 9 5 4");
 
-        System.out.print("Your Tree:\t");
+      System.out.print("Your Tree:\t");
 
-        tree.postorder();
+      tree.postorder();
 
-        System.out.println("\nExample 3: inorder traversal");
+      System.out.println("\nExample 3: inorder traversal");
 
-        System.out.println("Expected:\t" + "1 2 4 5 6 8 9 10 11 14");
+      System.out.println("Expected:\t" + "1 2 4 5 6 8 9 10 11 14");
 
-        System.out.print("Your Tree:\t");
+      System.out.print("Your Tree:\t");
 
-        tree.inorder();
+      tree.inorder();
 
-        tree.delete(1);
+      tree.delete(1);
 
-        System.out.println("\nExample 4: preorder traversal after a deleting a "
+      System.out.println("\nExample 4: preorder traversal after a deleting a "
 
-                           + "leaf");
+      + "leaf");
 
-        System.out.println("Expected:\t" + "4 2 5 9 6 8 11 10 14");
+      System.out.println("Expected:\t" + "4 2 5 9 6 8 11 10 14");
 
-        System.out.print("Your Tree:\t");
+      System.out.print("Your Tree:\t");
 
-        tree.preorder();
+      tree.preorder();
 
-        tree.delete(6);
+      tree.delete(6);
 
-        System.out.println("\nExample 5: preorder traversal after a deleting a "
+      System.out.println("\nExample 5: preorder traversal after a deleting a "
 
-                           + "node with one child");
+      + "node with one child");
 
-        System.out.println("Expected:\t" + "4 2 5 9 8 11 10 14");
+      System.out.println("Expected:\t" + "4 2 5 9 8 11 10 14");
 
-        System.out.print("Your Tree:\t");
+      System.out.print("Your Tree:\t");
 
-        tree.preorder();
+      tree.preorder();
 
-        tree.delete(9);
+      tree.delete(9);
 
-        System.out.println("\nExample 6: preorder traversal after a deleting a "
+      System.out.println("\nExample 6: preorder traversal after a deleting a "
 
-                           + "node with two children");
+      + "node with two children");
 
-        System.out.println("Expected:\t" + "4 2 5 8 11 10 14");
+      System.out.println("Expected:\t" + "4 2 5 8 11 10 14");
 
-        System.out.print("Your Tree:\t");
+      System.out.print("Your Tree:\t");
 
-        tree.preorder();
+      tree.preorder();
 
-        System.out.println("\nExample 7: size of the tree after insertions and "
+      System.out.println("\nExample 7: size of the tree after insertions and "
 
-                           + "deletions");
+      + "deletions");
 
-        System.out.println("Expected:\t" + "7");
+      System.out.println("Expected:\t" + "7");
 
-        System.out.println("Your Tree:\t" + tree.size());
+      System.out.println("Your Tree:\t" + tree.size());
+
    } // main
 
 } // BST
